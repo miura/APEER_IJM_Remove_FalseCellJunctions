@@ -1,0 +1,37 @@
+{
+    "spec": {
+        "inputs": {
+            "input_files": {
+                "type:list[file]": {}
+            },
+            "prefix": {
+                "type:string": {},
+                "default": "no-filter"
+            },
+            "name": {
+                "type:string": {},
+                "default": "output"
+            }
+        },
+        "outputs": {
+            "RESULTSDATA": {
+                "type:list[file]": {}
+            }
+        }
+    },
+    "ui": {
+        "inputs": {
+            "prefix": {
+                "index": 0,
+                "label": "Filter files (e.g .png)",
+                "widget:textbox": {}
+            },
+            "name": {
+                "index": 1,
+                "label": "Filename (default output.tif)",
+                "widget:textbox": {}
+            }
+        }
+    },
+    "image": "camodules.azurecr.io/stackgen:latest"
+}
