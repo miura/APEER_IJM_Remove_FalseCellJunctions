@@ -23,7 +23,7 @@
         "inputs": {
             "input_files": {
                 "index": 0,
-                "label": "",
+                "label": "Input Files",
                 "widget:none": null
             },
             "prefix": {
