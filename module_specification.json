@@ -27,12 +27,12 @@
                 "widget:none": null
             },
             "prefix": {
-                "index": 0,
+                "index": 1,
                 "label": "Filter files (e.g .png)",
                 "widget:textbox": {}
             },
             "name": {
-                "index": 1,
+                "index": 2,
                 "label": "Filename (default output.tif)",
                 "widget:textbox": {}
             }
