@@ -21,6 +21,10 @@
     },
     "ui": {
         "inputs": {
+            "input_files": {
+                "index": 0,
+                "widget:none": null
+            },
             "prefix": {
                 "index": 0,
                 "label": "Filter files (e.g .png)",
