@@ -29,7 +29,7 @@ RUN apt-get install -y \
                            
 # Install additional Fiji Plugins
 COPY ./CallLog.class /Fiji.app/plugins
-COPY ./generate_stack.ijm /
+COPY ./*.ijm /
 COPY ./JSON_Read.js /
 COPY ./start.sh /
 COPY ./font.conf /etc/fonts/fonts.conf
