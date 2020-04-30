@@ -3,8 +3,8 @@
 # Version: 0.1
 
 # Pull base CZSIP/Fiji.
-# FROM czsip/fiji_linux64_baseimage:latest
-FROM czsip/fiji
+FROM czsip/fiji_linux64_baseimage:latest
+#FROM czsip/fiji
 
 #get additional stuff
 RUN apt-get update; exit 0 && \
