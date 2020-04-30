@@ -1,6 +1,8 @@
 /*
-  ImageJ macro for removing detected cell-cell junctions with weak siignal (meaning the detection is bad)  
-  using virtual stacks to conserver RAM   so in theory even large number if images files --> stacks should work
+  ImageJ macro for removing segmented cell-cell junctions 
+  with weak fl. signal
+  - meaning that that detected junction is 
+  likely to be a result of oversegmentation -
   based on example generate_stack.ijm
  */
 
@@ -9,15 +11,14 @@ RESULTSPATH = "/output/";
 BATCHMODE = "true";
 
 // Read JSON Variables
-call("CallLog.shout", "calllog Trying to read WFE_JSON");
-
+call("CallLog.shout", "capturing WFE_JSON");
 WFE_file = "/params/WFE_input_params.json";
 if (!File.exists(WFE_file)) {
 	call("CallLog.shout", "WFE_input_params.json does not exist... exiting...");
 	eval("script", "System.exit(0);");
 	} 
 	else {
-		call("CallLog.shout", "WFE_input_params.json found... reading file...");
+		call("CallLog.shout", "[Local Mode] WFE_input_params.json found... reading file...");
 		WFE_JSON = File.openAsString(WFE_file);
 	}
 	
