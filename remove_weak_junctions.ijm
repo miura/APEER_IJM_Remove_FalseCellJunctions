@@ -9,8 +9,13 @@
 // General global vars
 RESULTSPATH = "/output/";
 BATCHMODE = "true";
+libmacro = "/apeerlib.ijm";
+out =runMacro( libmacro , "currentTime;input");
+call("CallLog.shout", "test out put library" + out);
 
 // Read JSON Variables
+WFE_JSON = runMacro( libmacro , "captureWFE_JSON");
+/*
 call("CallLog.shout", "capturing WFE_JSON");
 WFE_file = "/params/WFE_input_params.json";
 if (!File.exists(WFE_file)) {
@@ -23,10 +28,12 @@ if (!File.exists(WFE_file)) {
 	}
 	
 call("CallLog.shout", "WFE_JSON contents: " + WFE_JSON);
+*/
 
 // Read JSON WFE Parameters
 JSON_READER = "/JSON_Read.js";
-
+runMacro( libmacro , "checkJSON_ReadExists;" + JSON_READER);
+/*
 if (!File.exists(JSON_READER)) {
 	call("CallLog.shout", "JSON_Read.js does not exist... exiting...");
 	eval("script", "System.exit(0);");
@@ -34,6 +41,7 @@ if (!File.exists(JSON_READER)) {
 	else {
 		call("CallLog.shout", "JSON_Read.js found... reading file...");
 	}
+*/
 
 call("CallLog.shout", "Reading JSON Parameters");
 
@@ -41,7 +49,7 @@ call("CallLog.shout", "Reading JSON Parameters");
 INPUTFILES = runMacro(JSON_READER, "settings.input_files[0]");
 INPUTSTACK = runMacro(JSON_READER, "settings.input_files[0]");
 PREFIX = runMacro(JSON_READER, "settings.prefix");
-STACKNAME = runMacro(JSON_READER, "settings.name");
+OUTSTACKNAME = runMacro(JSON_READER, "settings.output_name");
 WFEOUTPUT = runMacro(JSON_READER, "settings.WFE_output_params_file");
 
 // Getting input file path from WFE input_files
@@ -50,8 +58,9 @@ IMAGEDIR_WFE = substring(INPUTFILES, 0, path_substring+1);
 
 main();
 
-function main() {
-	call("CallLog.shout", "Starting opening files, time: " + currentTime());
+function main() { 
+	tt = runMacro( libmacro , "currentTime");
+	call("CallLog.shout", "Starting opening files, time: " + tt);
 	
 	if (BATCHMODE=="true") {
 		setBatchMode(true);
@@ -63,11 +72,11 @@ function main() {
  	savingStack();
  	jsonOut();
 
-	call("CallLog.shout", "DONE! " + currentTime());
+	tt = runMacro( libmacro , "currentTime");
+	call("CallLog.shout", "DONE! " + tt);
 	run("Close All");
 	call("CallLog.shout", "Closed");
 	shout("test print");
-	print( "test macro print command" );
 	eval("script", "System.exit(0);");
 }
 
@@ -87,13 +96,13 @@ function importData() {
 }
 
 function savingStack() {
-	if (STACKNAME=="output") {
+	if (OUTSTACKNAME=="output") {
 		call("CallLog.shout", "writing tif stack with default name: output.tif");
 		saveAs("Tiff", "/output/output.tif");
 	}
 	else {
-		call("CallLog.shout", "writing tif stack with user name: " + STACKNAME + ".tif");
-		saveAs("Tiff", "/output/" + STACKNAME + ".tif");
+		call("CallLog.shout", "writing tif stack with user name: " + OUTSTACKNAME + ".tif");
+		saveAs("Tiff", "/output/" + OUTSTACKNAME + ".tif");
 	}
 }
 
@@ -106,11 +115,11 @@ function jsonOut() {
 	print(jsonout,"{");
 	print(jsonout,"\"RESULTSDATA\": [");
 
-	if (STACKNAME=="output") {
+	if (OUTSTACKNAME=="output") {
 		print(jsonout,"\t\"/output/output.tif\"");
 	}
 	else {
-		print(jsonout,"\t\"/output/"+ STACKNAME + ".tif\"");
+		print(jsonout,"\t\"/output/"+ OUTSTACKNAME + ".tif\"");
 	}
 	print(jsonout,"\t]");
 	print(jsonout,"}");
