@@ -11,10 +11,10 @@ function readJSON(call) {
     var jsonDir = "/params/WFE_input_params.json";
     var f = new java.io.File( jsonDir );
     if ( f.exists() ){
+        java.lang.System.out.println("....read from json file: " + call);
         var settings = JSON.parse(IJ.openAsString(jsonDir));
-        // var allPropertyNames = Object.keys(settings);	// put JSON keys in new Array
-        // var count = Object.keys(settings).length;		// count number of JSON keys
     } else {
+        java.lang.System.out.println("read from environment: " + call);
         var settings = JSON.parse( java.lang.System.getenv()['WFE_INPUT_JSON'] );
     }
     return (eval(call));
