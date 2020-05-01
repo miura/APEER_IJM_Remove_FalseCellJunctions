@@ -14,13 +14,18 @@
             }
         },
         "outputs": {
-            "RESULTSDATA": {
-                "type:list[file]": {}
+            "Corrected_Image": {
+                "type:file": {}
             }
         }
     },
     "ui": {
         "inputs": {
+            "input_files": {
+                "index": 0,
+                "widget:none": null,
+                "label": "Input files"
+            },
             "prefix": {
                 "index": 1,
                 "label": "Filter files (e.g .png)",
@@ -31,7 +36,8 @@
                 "label": "Filename (default CorrectedMask.tif)",
                 "widget:textbox": {}
             }
-        }
+        },
+        "outputs": {}
     },
     "image": "camodules.azurecr.io/stackgen:latest"
 }
