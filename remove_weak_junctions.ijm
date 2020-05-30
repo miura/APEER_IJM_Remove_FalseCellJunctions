@@ -4,6 +4,9 @@
   - meaning that that detected junction is 
   likely to be a result of oversegmentation -
   based on example generate_stack.ijm
+  
+  MIT License
+  Copyright (c) 2020 Kota Miura
  */
 
 // General global vars
